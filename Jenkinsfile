@@ -17,9 +17,33 @@ pipeline {
             }
         }
 
-        stage('Project Info') {
+        stage('Compile') {
             steps {
-                bat 'dir'
+                bat '''
+                if exist out rmdir /S /Q out
+                mkdir out
+
+                javac -encoding UTF-8 ^
+                    -d out ^
+                    src\\AdvancedDataProcessorApp.java ^
+                    src\\Main.java
+                '''
+            }
+        }
+
+        stage('Create JAR') {
+            steps {
+                bat '''
+                if exist TOOL_KIP.jar del TOOL_KIP.jar
+
+                jar cfe TOOL_KIP.jar AdvancedDataProcessorApp -C out .
+                '''
+            }
+        }
+
+        stage('Archive JAR') {
+            steps {
+                archiveArtifacts artifacts: 'TOOL_KIP.jar', fingerprint: true
             }
         }
     }
