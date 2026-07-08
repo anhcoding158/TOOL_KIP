@@ -57,7 +57,10 @@ pipeline {
                     --name DataProcessor ^
                     --main-jar TOOL_KIP.jar ^
                     --main-class AdvancedDataProcessorApp ^
-                    --type app-image
+                    --type exe ^
+                    --win-dir-chooser ^
+                    --win-menu ^
+                    --win-shortcut
                 '''
             }
         }
