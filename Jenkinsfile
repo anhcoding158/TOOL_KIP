@@ -41,20 +41,45 @@ pipeline {
             }
         }
 
-        stage('Archive JAR') {
+        stage('Package EXE') {
             steps {
-                archiveArtifacts artifacts: 'TOOL_KIP.jar', fingerprint: true
+                bat '''
+                if exist package_input rmdir /S /Q package_input
+                if exist release rmdir /S /Q release
+
+                mkdir package_input
+
+                copy TOOL_KIP.jar package_input
+
+                jpackage ^
+                    --input package_input ^
+                    --dest release ^
+                    --name DataProcessor ^
+                    --main-jar TOOL_KIP.jar ^
+                    --main-class AdvancedDataProcessorApp ^
+                    --type app-image
+                '''
+            }
+        }
+
+        stage('Archive') {
+            steps {
+                archiveArtifacts artifacts: 'TOOL_KIP.jar,release/**', fingerprint: true
             }
         }
     }
 
     post {
         success {
-            echo 'Build Success!'
+            echo '=============================='
+            echo ' BUILD SUCCESS'
+            echo '=============================='
         }
 
         failure {
-            echo 'Build Failed!'
+            echo '=============================='
+            echo ' BUILD FAILED'
+            echo '=============================='
         }
     }
 }
