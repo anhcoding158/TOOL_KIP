@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="TOOL_KIP:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/TOOL_KIP_jar</output-path>
+    <root id="archive" name="TOOL_KIP.jar">
+      <element id="module-output" name="TOOL_KIP" />
+    </root>
+  </artifact>
+</component>
