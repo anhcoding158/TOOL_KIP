@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         APP_NAME = "DataProcessor"
-        APP_VERSION = "${env.BUILD_NUMBER}"
+        APP_VERSION = "1.0.${env.BUILD_NUMBER}"
         MAIN_CLASS = "AdvancedDataProcessorApp"
         JAR_NAME = "TOOL_KIP.jar"
     }
