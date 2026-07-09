@@ -4,7 +4,7 @@ pipeline {
     environment {
         APP_NAME = "DataProcessor"
         APP_VERSION = "1.0.${env.BUILD_NUMBER}"
-        MAIN_CLASS = "AdvancedDataProcessorApp"
+        MAIN_CLASS = "app.Main"
         JAR_NAME = "TOOL_KIP.jar"
     }
 
@@ -42,10 +42,8 @@ pipeline {
                 if exist out rmdir /S /Q out
                 mkdir out
 
-                javac -encoding UTF-8 ^
-                    -d out ^
-                    src\\AdvancedDataProcessorApp.java ^
-                    src\\Main.java
+                dir /s /B src\\*.java > sources.txt
+                javac -encoding UTF-8 -d out @sources.txt
                 '''
             }
         }
