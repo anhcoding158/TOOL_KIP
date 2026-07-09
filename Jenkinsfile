@@ -87,6 +87,7 @@ pipeline {
                     --vendor "TOOL_KIP" ^
                     --main-jar %JAR_NAME% ^
                     --main-class %MAIN_CLASS% ^
+                    --icon icon.ico ^
                     --win-dir-chooser ^
                     --win-menu ^
                     --win-shortcut ^
