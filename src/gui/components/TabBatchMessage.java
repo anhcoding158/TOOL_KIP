@@ -77,7 +77,7 @@ public class TabBatchMessage extends JPanel {
         JButton btnOpenFolder = new ModernActionButton("Open Folder", AppConstants.COLOR_AMBER);
         btnOpenFolder.addActionListener(e -> UIHelper.openFolder(Paths.get(txtOutputDir.getText().trim()), appLogger));
 
-        JButton btnExecute = new ModernActionButton("EXPORT MESSAGE", AppConstants.COLOR_SUCCESS);
+        JButton btnExecute = new ModernActionButton("Export Message", AppConstants.COLOR_SUCCESS);
         btnExecute.addActionListener(e -> triggerExecution());
 
         actionRow.add(btnOpenFolder);
