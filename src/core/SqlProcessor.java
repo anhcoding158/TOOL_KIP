@@ -68,15 +68,23 @@ public class SqlProcessor {
         }).start();
     }
 
+    // ĐỘI ĐÃ SỬA: Gom nhóm hiển thị hàng ngang (10 phần tử / hàng)
     private static String generateSmartSqlBlock(String safeTemplate, List<String> batchData) {
         StringBuilder sb = new StringBuilder();
-        sb.append("(\n");
+        sb.append("(\n    "); // Mở ngoặc và lùi đầu dòng đầu tiên
+
         for (int i = 0; i < batchData.size(); i++) {
-            sb.append("    '").append(batchData.get(i).replace("'", "''")).append("'");
-            if (i < batchData.size() - 1) sb.append(",\n");
-            else sb.append("\n");
+            sb.append("'").append(batchData.get(i).replace("'", "''")).append("'");
+
+            if (i < batchData.size() - 1) {
+                sb.append(", ");
+                // Cứ sau 10 phần tử thì xuống dòng và lùi vào để file cân đối, đẹp mắt
+                if ((i + 1) % 10 == 0) {
+                    sb.append("\n    ");
+                }
+            }
         }
-        sb.append(")");
+        sb.append("\n)");
         return safeTemplate.replace("${itemset}", sb.toString());
     }
 
